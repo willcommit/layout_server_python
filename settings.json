@@ -1,0 +1,7 @@
+{
+    "port": 123000,
+    "database": {
+        "path": "./layout_saver.db"
+    },
+    "layout_amount": 8
+}
