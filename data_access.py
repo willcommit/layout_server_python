@@ -99,7 +99,7 @@ def get_all_decoders(id):
         all_decoders = cursor.fetchall()
         return all_decoders
 
-def get_single_decoder(nr, id):
+def get_single_decoder(id, nr):
     sql = """
 		SELECT *
         FROM decoder
@@ -129,13 +129,83 @@ def edit_decoder_value(id, nr, value):
 
 def delete_decoder(id, nr):
     sql = """
-		DELETE FROM layout
+		DELETE FROM decoder
         WHERE layout_id = :id AND decoder_nr = :nr;
 		"""
     try:
         with sqlite3.connect(read_setting(Settings.db_path)) as connection:
             connection.execute(sql, {"id": id, "nr": nr})
             result = {'status': 1, 'message': 'Decoder Deleted'}
+    except:
+        result = {'status': 0, 'message': 'Error'}
+    return result
+
+    #Access Screen
+
+def add_screen(id, nr, fullscreen):
+    sql = """
+		INSERT INTO screen (layout_id,screen_nr, fullscreen) 
+		VALUES (:id, :nr, :fullscreen)
+		ON CONFLICT(layout_id, screen_nr) DO UPDATE SET fullscreen = :fullscreen;
+		"""
+    try:
+        with sqlite3.connect(read_setting(Settings.db_path)) as connection:
+            cursor = connection.cursor()
+            cursor.execute(sql, {"id": id, "nr": nr, "fullscreen": fullscreen})
+            result = {'status': 1, 'message': 'Screen Added'}
+    except:
+        result = {'status': 0, 'message': 'error'}
+    return result
+
+
+def get_all_screens(id):
+    sql = """
+        SELECT * FROM screen
+        WHERE layout_id = :id;
+        """
+    with sqlite3.connect(read_setting(Settings.db_path)) as connection:
+        cursor = connection.cursor()
+        cursor.execute(sql, {"id": id})
+        all_screens = cursor.fetchall()
+        return all_screens
+
+def get_single_screen(id, nr):
+    sql = """
+		SELECT *
+        FROM screen
+        WHERE layout_id = :id AND screen_nr = :nr;
+		"""
+    with sqlite3.connect(read_setting(Settings.db_path)) as connection:
+        cursor = connection.cursor()
+        cursor.execute(sql, {"id": id, "nr": nr})
+        screen = cursor.fetchone()
+        return screen
+
+
+def edit_sreen_value(id, nr, value):
+    sql = """
+		UPDATE screen
+        SET fullscreen = :fullscreen
+        WHERE layout_id = :id AND screen_nr = :nr ;
+		"""
+    try:
+        with sqlite3.connect(read_setting(Settings.db_path)) as connection:
+            connection.execute(sql, {"id": id, "nr": nr})
+            result = {'status': 1, 'message': 'Screen Edited'}
+    except:
+        result = {'status': 0, 'message': 'Error'}
+    return result
+
+
+def delete_screen(id, nr):
+    sql = """
+		DELETE FROM screen
+        WHERE layout_id = :id AND screen_nr = :nr;
+		"""
+    try:
+        with sqlite3.connect(read_setting(Settings.db_path)) as connection:
+            connection.execute(sql, {"id": id, "nr": nr})
+            result = {'status': 1, 'message': 'Screen Deleted'}
     except:
         result = {'status': 0, 'message': 'Error'}
     return result
