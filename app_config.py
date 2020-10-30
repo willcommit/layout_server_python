@@ -61,6 +61,8 @@ class AppConfig:
                 settings['database']['path'] = value
             elif setting == Settings.layout_amount:
                 settings['layout_amount'] = value
+            else:
+                raise KeyError('No such setting')
 
         with open("app_config.json", "w") as json_file:
             json.dump(settings, json_file, indent=4)      
