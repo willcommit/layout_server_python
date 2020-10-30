@@ -3,29 +3,65 @@ from enum import Enum
 
 class Settings (Enum):
     port = 1
-    db_path = 2
-    layout_amount = 3
+    debug = 2
+    db_path = 3
+    layout_amount = 4
 
-def read_setting(setting):
-    with open('settings.json', 'r') as json_file:
-        settings = json.load(json_file)
-        if setting == Settings.port:
-            return settings['port']
-        elif setting == Settings.db_path:
-            return settings['database']['path']
-        elif setting == Settings.layout_amount:
-            return settings['layout_amount']
+#TODO add JSON validation
+class AppConfig:
 
-def write_setting(setting, value):
+    def __init__(self):
+        with open('app_config.json', 'r') as json_file:
+            config = json.load(json_file)
+            self.__port = config['port']
+            self.__debug = config['debug']
+            self.__db_path = config['database']['path']
+            self.__layout_amount = config['layout_amount']
 
-    with open('settings.json', 'r') as json_file:
-        settings = json.load(json_file)
-        if setting == Settings.port:
-            settings['port'] = value
-        elif setting == Settings.db_path:
-            settings['database']['path'] = value
-        elif setting == Settings.layout_amount:
-            settings['layout_amount'] = value
+    def get_port(self):
+        return self.__port
 
-    with open("settings.json", "w") as json_file:
-        json.dump(settings, json_file, indent=4)
+    def set_port(self, port_number):
+        self.__port = port_number
+        self.__write_config(Settings.port, port_number)
+
+    def get_debug(self):
+        return self.__debug
+    
+    def set_debug(self, debug_state):
+        self.__debug = debug_state
+        self.__write_config(Settings.debug, debug_state)
+
+    def get_db_path(self):
+        return self.__db_path
+    
+    def set_db_path(self, db_path):
+        self.__db_path = db_path
+        self.__write_config(Settings.db_path, db_path)
+
+    def get_layout_amount(self):
+        return self.__layout_amount
+
+    def get_layout_amount_update(self):
+        with open('app_config.json', 'r') as json_file:
+            config = json.load(json_file)
+            self.__layout_amount = config['layout_amount']
+            return self.__layout_amount
+
+    def set_layout_amount(self, layout_amount):
+        self.__layout_amount = layout_amount
+        self.__write_config(Settings.layout_amount, layout_amount)
+        
+    def __write_config(self, setting, value):
+        with open('app_config.json', 'r') as json_file:
+            settings = json.load(json_file)
+            if setting == Settings.port:
+                settings['port'] = value
+            elif setting == Settings.db_path:
+                settings['database']['path'] = value
+            elif setting == Settings.layout_amount:
+                settings['layout_amount'] = value
+
+        with open("app_config.json", "w") as json_file:
+            json.dump(settings, json_file, indent=4)      
+

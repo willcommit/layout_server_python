@@ -1,5 +1,5 @@
 import sqlite3
-from app_config import Settings, read_setting
+from app import db_path
 
 CREATE_LAYOUT = """CREATE TABLE layout (
 	layout_id INTEGER PRIMARY KEY NOT NULL CHECK(layout_id >= 1 AND layout_id <= 16) UNIQUE,
@@ -25,17 +25,8 @@ CREATE_SCREEN = """CREATE TABLE screen (
 	);
 	"""
 
-database_path = read_setting(Settings.db_path)
-
-def drop_table():
-    with sqlite3.connect(database_path) as connection:
-        c = connection.cursor()
-        c.execute("""DROP TABLE IF EXISTS layout;""")
-    return True
-
-
 def create_db():
-	with sqlite3.connect(database_path) as connection:
+	with sqlite3.connect(db_path) as connection:
 		c = connection.cursor() 
 		c.execute(CREATE_LAYOUT)
 		c.execute(CREATE_DECODER)
@@ -51,7 +42,7 @@ def populate_layout_data():
 		ON CONFLICT(layout_id) DO UPDATE SET name= :name
 		"""
 
-	with sqlite3.connect(database_path) as connection:
+	with sqlite3.connect(db_path) as connection:
 		cursor = connection.cursor()
 		for i in range(16):
 			i += 1
