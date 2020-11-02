@@ -3,10 +3,12 @@ import json
 from flask import Flask, request, jsonify
 from waitress import serve
 from app_config import AppConfig
+from helpers import start_backup
 import data_access
 
 config = AppConfig()
-db_path = config.get_db_path()
+
+start_backup()
 
 app = Flask(__name__)
 

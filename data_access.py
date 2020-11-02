@@ -1,6 +1,9 @@
 import sqlite3
 from helpers import dict_factory
-from app import db_path
+from app_config import AppConfig
+
+config = AppConfig()
+db_path = config.get_db_path()
 
 #Access Layout
 def add_layout(id, name):

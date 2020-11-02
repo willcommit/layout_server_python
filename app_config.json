@@ -2,7 +2,10 @@
     "port": 8000,
     "debug": false,
     "database": {
-        "path": "./layout_saver.db"
+        "path": "./layout_saver.db",
+        "backup_folder": ".\\db_backup\\",
+        "backup_filename": "layout_saver_{timestamp}.db",
+        "backup_time_minutes": 60
     },
     "layout_amount": 3
 }

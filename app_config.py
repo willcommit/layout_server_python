@@ -16,6 +16,9 @@ class AppConfig:
             self.__port = config['port']
             self.__debug = config['debug']
             self.__db_path = config['database']['path']
+            self.__backup_folder = config['database']['backup_folder']
+            self.__backup_filename = config['database']['backup_filename']
+            self.__backup_time = config['database']['backup_time_minutes']
             self.__layout_amount = config['layout_amount']
 
     def get_port(self):
@@ -38,6 +41,15 @@ class AppConfig:
     def set_db_path(self, db_path):
         self.__db_path = db_path
         self.__write_config(Settings.db_path, db_path)
+
+    def get_backup_folder(self):
+        return self.__backup_folder
+    
+    def get_backup_filename(self):
+        return self.__backup_filename
+
+    def get_backup_time(self):
+        return self.__backup_time
 
     def get_layout_amount(self):
         return self.__layout_amount
