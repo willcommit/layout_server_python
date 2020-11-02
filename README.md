@@ -1,5 +1,3 @@
-
-
 ## INSTALL, START AND UPDATE
 
 **DEPLOY** 
@@ -28,27 +26,44 @@ Get all layouts
 api/layout
 
 Get layout name by id  
-api/layout/{id}/
+api/layout/{id}
 
 Get all screens by layout id  
-api/layout/{id}/screens
+api/layout/{id}/screen
 
-Get fullscreen mode based on specific screen on specific layout  
-api/layout/{id}/screen/{id}/fullscreen
+Get screen on specific layout  
+api/layout/{id}/screen/{id}
 
 Get all decoders by layout id  
-api/layout/{id}/decoders1.
+api/layout/{id}/decoder
 
-Get decoder value based on specific decoder on specific layout  
-api/layout/{id}/decoder/{id}/value
+Get decoder on specific layout  
+api/layout/{id}/decoder/{id}
+
+Get layout amount
+api/layout/amount
 
 **POST**
 
-Create or update layout with a name, data in form
+Create or update layout with a name
 api/layout
 
-Create or update screen with a fullscreen or not  
+Create or update screen 
 api/layout/{id}/screen/{id}
 
-Create or update decoder with a value  
+Create or update decoder 
 api/layout/{id}/decoder/{id}
+
+Post layout amount
+api/layout/amount
+
+**DELETE**
+
+Delete layout
+api/layout/{id}  
+
+Delete screen
+api/layout/{id}/screen/{id}  
+
+Delete decoder
+api/layout/{id}/decoder/{id}  
