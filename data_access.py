@@ -190,7 +190,7 @@ def get_single_screen(id, nr):
         return screen
 
 
-def edit_sreen_value(id, nr, value):
+def edit_screen_value(id, nr, value):
     sql = """
 		UPDATE screen
         SET fullscreen = :fullscreen

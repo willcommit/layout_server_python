@@ -79,14 +79,14 @@ def screen_resource(layout_id, screen_nr):
         return json.dumps(screen)
     elif request.method == 'PUT':
         data = request.form
-        result = data_access.edit_decoder_value(layout_id, screen_nr, data['fullscreen'])
+        result = data_access.edit_screen_value(layout_id, screen_nr, data['fullscreen'])
         return jsonify(result)
     elif request.method == 'DELETE':
-        result = data_access.delete_decoder(layout_id, screen_nr)
+        result = data_access.delete_screen(layout_id, screen_nr)
         return jsonify(result)
 
 #LAYOUT AMOUNT ROUTES
-@app.route('/api/settings/layout/amount', methods=['GET', 'POST'])
+@app.route('/api/layout/amount', methods=['GET', 'POST'])
 def settings_resource():
     if request.method == 'GET':
         setting = config.get_layout_amount_update()
