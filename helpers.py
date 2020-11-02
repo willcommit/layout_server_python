@@ -18,7 +18,6 @@ def backup_job():
     
     backup_path = path.join(backup_folder + backup_filename)
     copyfile(config.get_db_path(), backup_path)
-    print("Backup created " + backup_path)
     
 def start_backup():
     backup_time = config.get_backup_time()
