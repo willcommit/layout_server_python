@@ -7,7 +7,7 @@ Windows exe deploy with no console
 pyinstaller --onefile --windowed --name LayoutSaver app.py
 
 Windows exe deploy with console  
-pyinstaller --onefile -name LayoutSaver app.py
+pyinstaller --onefile --name LayoutSaver app.py
 
 Generate DB with db_model.py
 
@@ -31,13 +31,13 @@ api/layout/{id}
 Get all screens by layout id  
 api/layout/{id}/screen
 
-Get screen on specific layout  
+Get a specific screen on a specific layout  
 api/layout/{id}/screen/{id}
 
 Get all decoders by layout id  
 api/layout/{id}/decoder
 
-Get decoder on specific layout  
+Get a specific decoder on a specific layout  
 api/layout/{id}/decoder/{id}
 
 Get layout amount
@@ -49,10 +49,10 @@ Create or update layout with a name
 api/layout
 
 Create or update screen 
-api/layout/{id}/screen/{id}
+api/layout/{id}/screen
 
 Create or update decoder 
-api/layout/{id}/decoder/{id}
+api/layout/{id}/decoder
 
 Post layout amount
 api/layout/amount

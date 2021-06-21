@@ -1,3 +1,4 @@
+import logging
 from apscheduler.schedulers.background import BackgroundScheduler
 from shutil import copyfile
 from datetime import datetime
@@ -17,7 +18,11 @@ def backup_job():
         mkdir(backup_folder)
     
     backup_path = path.join(backup_folder + backup_filename)
-    copyfile(config.get_db_path(), backup_path)
+
+    try:
+        copyfile(config.get_db_path(), backup_path)
+    except OSError as error:
+        print(error)
     
 def start_backup():
     backup_time = config.get_backup_time()

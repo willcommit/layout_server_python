@@ -19,8 +19,8 @@ CREATE_DECODER = """CREATE TABLE decoder (
 	"""
 
 CREATE_SCREEN = """CREATE TABLE screen (
-	screen_nr INTEGER NOT NULL CHECK(screen_nr>=1 AND screen_nr<=6),
-	fullscreen	NUMERIC NOT NULL DEFAULT 0 CHECK(fullscreen=1 or fullscreen=0),
+	screen_nr INTEGER NOT NULL CHECK(screen_nr>=1 AND screen_nr<=100),
+	fullscreen	NUMERIC NOT NULL DEFAULT 0 CHECK(fullscreen>=0 or fullscreen<=10),
 	layout_id INTEGER NOT NULL,
 	PRIMARY KEY(screen_nr,layout_id),
 	FOREIGN KEY(layout_id) REFERENCES layout(layout_id) ON UPDATE SET NULL ON DELETE SET NULL

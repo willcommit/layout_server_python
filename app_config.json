@@ -1,6 +1,6 @@
 {
     "port": 8000,
-    "debug": false,
+    "debug": true,
     "database": {
         "path": "./layout_saver.db",
         "backup_folder": ".\\db_backup\\",
