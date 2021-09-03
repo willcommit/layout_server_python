@@ -17,7 +17,7 @@ app = Flask(__name__)
 def layout_collection():
     if request.method == 'GET':
         all_layouts = data_access.get_all_layouts()
-        return json.dumps(all_layouts)
+        return json.dumps(all_layouts, ensure_ascii=False).encode('utf8')
     elif request.method == 'POST':
         data = request.form
         result = data_access.add_layout(data['layout_id'], data['name'])
@@ -28,7 +28,7 @@ def layout_collection():
 def layout_resource(layout_id):
     if request.method == 'GET':
         layout = data_access.get_single_layout(layout_id)
-        return json.dumps(layout)
+        return json.dumps(layout, ensure_ascii=False).encode('utf8')
     elif request.method == 'PUT':
         data = request.form
         result = data_access.edit_layout_name(layout_id, data['name'])
